@@ -21,7 +21,7 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | b
     && nvm alias default $NODE_VERSION \
     && nvm use default \
     && npm set progress=false \
-    && npm install -g eslint eslint-plugin-react
+    && npm install -g eslint eslint-plugin-react yarn
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
