@@ -1,10 +1,6 @@
 FROM ruby:2.3.3
 
-ENV NODE_VERSION 7.2.1
-ENV NVM_DIR /usr/local/nvm
 ENV RAILS_VERSION 4.2.7.1
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -15,13 +11,20 @@ RUN apt-get update && apt-get install -y mysql-client postgresql-client postgres
 	ca-certificates bzip2 \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash \
-    && source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default \
-    && npm set progress=false \
-    && npm install -g eslint eslint-plugin-react yarn
+RUN \
+  cd /tmp && \
+  wget http://nodejs.org/dist/node-latest.tar.gz && \
+  tar xvzf node-latest.tar.gz && \
+  rm -f node-latest.tar.gz && \
+  cd node-v* && \
+  ./configure && \
+  CXX="g++ -Wno-unused-local-typedefs" make -j8 && \
+  CXX="g++ -Wno-unused-local-typedefs" make -j8 install && \
+  cd /tmp && \
+  rm -rf /tmp/node-v* && \
+  npm install -g npm eslint eslint-plugin-react yarn && \
+  printf '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
+
 
 RUN mkdir /tmp/phantomjs \
 	&& curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
