@@ -22,7 +22,7 @@ RUN \
   CXX="g++ -Wno-unused-local-typedefs" make -j8 install && \
   cd /tmp && \
   rm -rf /tmp/node-v* && \
-  npm install -g npm eslint eslint-plugin-react yarn && \
+  npm install -g npm eslint eslint-plugin-react yarn jsdom && \
   printf '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
 
 
