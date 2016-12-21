@@ -27,7 +27,7 @@ RUN . $HOME/.nvm/nvm.sh && nvm install $NODE_VERSION && \
   echo 'source $NVM_DIR/versions/node/v$NODE_VERSION/bin/node' >> /etc/profile
 
 
-RUN yarn global add eslint-plugin-react jsdom karma
+RUN yarn global add eslint-plugin-react jsdom karma eslint
 
 RUN mkdir /tmp/phantomjs \
 	&& curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
