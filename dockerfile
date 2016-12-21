@@ -7,8 +7,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update && apt-get install -y build-essential --no-install-recommends
 
 RUN apt-get update && apt-get install -y mysql-client postgresql-client postgresql \
-	postgresql-contrib sqlite3 libxml2-dev libxslt1-dev imagemagick --no-install-recommends \
-	ca-certificates bzip2 \
+	postgresql-contrib sqlite3 libxml2-dev libxslt1-dev imagemagick ca-certificates bzip2 --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN \
