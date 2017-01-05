@@ -1,7 +1,7 @@
 FROM ruby:2.3.3
 
 ENV RAILS_VERSION 4.2.7.1
-ENV NODE_VERSION 7.2.1
+ENV NODE_VERSION 7.4.0
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -18,7 +18,7 @@ ENV NVM_DIR /root/.nvm
 ENV NODE_DIR $NVM_DIR/versions/node/v$NODE_VERSION/
 ENV PATH $NODE_DIR/bin:$NVM_DIR/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash && \
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash && \
   echo 'source $NVM_DIR/nvm.sh' >> /etc/profile
 
 RUN . $HOME/.nvm/nvm.sh && nvm install $NODE_VERSION && \
